@@ -1,4 +1,4 @@
-import { clientConfig } from '@sanity.config';
+import { clientConfig } from '@utils/sanity.client';
 import { createClient, groq } from 'next-sanity';
 
 // queries

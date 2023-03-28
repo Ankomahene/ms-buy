@@ -10,9 +10,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { IFeaturedProduct, IProduct } from '@src/model';
-import { getSubstring } from '@src/utils';
+import { getSubstring } from '@src/helpers';
 import { BsHeart } from 'react-icons/bs';
 import { Rating } from './Rating';
+import Link from 'next/link';
 
 interface ProductCardProps {
   product: IProduct | IFeaturedProduct;
@@ -33,15 +34,19 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <BsHeart />
       </Button>
       <CardBody>
-        <Box
-          bg={`center / contain no-repeat url(${product.mainImage})`}
-          borderRadius="lg"
-          boxSize="200px"
-          mx="auto"
-        />
+        <Link href={`/products/${product.slug}`}>
+          <Box
+            bg={`center / contain no-repeat url(${product.mainImage})`}
+            borderRadius="lg"
+            boxSize="200px"
+            mx="auto"
+          />
+        </Link>
         <Stack mt="6" spacing="3">
           <Flex justify="space-between" align="center">
-            <Heading size="sm">{getSubstring(product.name, 20)}</Heading>
+            <Link href={`/products/${product.slug}`}>
+              <Heading size="sm">{getSubstring(product.name, 20)}</Heading>
+            </Link>
             <Flex color="brand.primaryDark" fontWeight="bold">
               <Text fontSize="sm">$ </Text>
               <Text fontSize="lg">{product.price}</Text>

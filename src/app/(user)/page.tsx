@@ -2,14 +2,8 @@ import { Banner } from '@src/features/home/Banner';
 import { FeaturedProducts } from '@src/features/home/FeaturedProducts';
 import { TopCategories } from '@src/features/home/TopCategories';
 import { IFeaturedItems } from '@src/model';
-import { ClientConfig, createClient, groq } from 'next-sanity';
-
-const clientConfig: ClientConfig = {
-  projectId: 'gbmlc5y8',
-  dataset: 'production',
-  useCdn: false,
-  apiVersion: '2023-03-23',
-};
+import { client } from '@utils/sanity.client';
+import { groq } from 'next-sanity';
 
 const getAllFeaturedItemsQueries = `
     *[_type == "featuredProductsAndCategories"]{
@@ -24,6 +18,7 @@ const getAllFeaturedItemsQueries = `
             name,
             description,
             price,
+            "slug": slug.current,
             rating,
             "mainImage": mainImage.asset->url,
         },
@@ -32,6 +27,7 @@ const getAllFeaturedItemsQueries = `
             name,
             description,
             price,
+            "slug": slug.current,
             rating,
             "mainImage": mainImage.asset->url,
         },
@@ -40,6 +36,7 @@ const getAllFeaturedItemsQueries = `
             name,
             description,
             price,
+            "slug": slug.current,
             rating,
             "mainImage": mainImage.asset->url,
         }
@@ -47,8 +44,10 @@ const getAllFeaturedItemsQueries = `
 `;
 
 const getFeaturedItemsAsync = () => {
-  return createClient(clientConfig).fetch(groq`${getAllFeaturedItemsQueries}`);
+  return client.fetch(groq`${getAllFeaturedItemsQueries}`);
 };
+
+export const revalidate = 60; // revalidate this page every 60 seconds
 
 export default async function Home() {
   const featuredItems: IFeaturedItems[] = await getFeaturedItemsAsync();

@@ -27,6 +27,7 @@ export interface IFeaturedProduct {
   price: number;
   rating: IRating;
   mainImage: string;
+  slug: string;
 }
 
 export interface ICategory {

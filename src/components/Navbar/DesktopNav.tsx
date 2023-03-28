@@ -1,4 +1,4 @@
-import { navItems } from '@/utils';
+import { navItems } from '@/helpers';
 import { Box, Flex, Stack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { AppLogo } from '../AppLogo';

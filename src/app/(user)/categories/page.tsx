@@ -1,15 +1,7 @@
-import { ProductCard } from '@src/components/ProductCard';
 import { AllCategories } from '@src/features/categories';
-import { AllProducts } from '@src/features/products';
-import { ICategory, IProduct } from '@src/model';
-import { ClientConfig, createClient, groq } from 'next-sanity';
-
-const clientConfig: ClientConfig = {
-  projectId: 'gbmlc5y8',
-  dataset: 'production',
-  useCdn: false,
-  apiVersion: '2023-03-23',
-};
+import { ICategory } from '@src/model';
+import { client } from '@utils/sanity.client';
+import { groq } from 'next-sanity';
 
 const getAllCategoriesQueries = `
     *[_type == "category"] {
@@ -21,8 +13,10 @@ const getAllCategoriesQueries = `
 `;
 
 const getCategoriesAsync = () => {
-  return createClient(clientConfig).fetch(groq`${getAllCategoriesQueries}`);
+  return client.fetch(groq`${getAllCategoriesQueries}`);
 };
+
+export const revalidate = 60; // revalidate this page every 60 seconds
 
 export default async function AllCategoriesPage() {
   const categories: ICategory[] = await getCategoriesAsync();

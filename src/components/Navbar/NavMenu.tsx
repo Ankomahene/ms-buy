@@ -12,7 +12,7 @@ import {
   Input,
   useDisclosure,
 } from '@chakra-ui/react';
-import { navItems } from '@src/utils';
+import { navItems } from '@src/helpers';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 import { VscListFlat } from 'react-icons/vsc';
