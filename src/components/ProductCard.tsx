@@ -9,30 +9,50 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { IFeaturedProduct, IProduct } from '@src/model';
+import { IProduct } from '@src/model';
 import { getSubstring } from '@src/helpers';
-import { BsHeart } from 'react-icons/bs';
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { Rating } from './Rating';
 import Link from 'next/link';
+import { AppContext } from '@src/context/AppContext';
+import { useContext } from 'react';
 
 interface ProductCardProps {
-  product: IProduct | IFeaturedProduct;
+  product: IProduct;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { addItem, removeItem, isAdded } = useContext(AppContext);
+
   return (
     <Card w="xs" pos="relative" m="0.5rem">
-      <Button
-        pos="absolute"
-        variant="ghost"
-        bgColor="transparent"
-        color="red.400"
-        _hover={{ bgColor: 'transparent' }}
-        rounded="full"
-        title="Add to Wishlist"
-      >
-        <BsHeart />
-      </Button>
+      {isAdded('wishlist', product.id) ? (
+        <Button
+          pos="absolute"
+          variant="ghost"
+          bgColor="transparent"
+          color="red.400"
+          _hover={{ bgColor: 'transparent' }}
+          rounded="full"
+          title="Remove from Wishlist"
+          onClick={() => removeItem('wishlist', product.id)}
+        >
+          <BsHeartFill />
+        </Button>
+      ) : (
+        <Button
+          pos="absolute"
+          variant="ghost"
+          bgColor="transparent"
+          color="red.400"
+          _hover={{ bgColor: 'transparent' }}
+          rounded="full"
+          title="Add to Wishlist"
+          onClick={() => addItem('wishlist', product)}
+        >
+          <BsHeart />
+        </Button>
+      )}
       <CardBody>
         <Link href={`/products/${product.slug}`}>
           <Box
@@ -54,16 +74,32 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </Flex>
           <Text fontSize="sm"> {getSubstring(product.description, 30)} </Text>
           <Rating rating={product.rating} />
-          <Button
-            variant="outline"
-            borderColor="brand.primary"
-            color="brand.primary"
-            borderRadius="50px"
-            size="sm"
-            maxW="120px"
-          >
-            Add to cart
-          </Button>
+
+          {isAdded('cart', product.id) ? (
+            <Button
+              variant="outline"
+              borderColor="gray.200"
+              color="gray.500"
+              borderRadius="50px"
+              size="sm"
+              maxW="150px"
+              onClick={() => removeItem('cart', product.id)}
+            >
+              Remove from cart
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              borderColor="brand.primary"
+              color="brand.primary"
+              borderRadius="50px"
+              size="sm"
+              maxW="120px"
+              onClick={() => addItem('cart', product)}
+            >
+              Add to cart
+            </Button>
+          )}
         </Stack>
       </CardBody>
     </Card>

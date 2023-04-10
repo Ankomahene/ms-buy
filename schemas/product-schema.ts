@@ -32,7 +32,7 @@ export const ProductSchema = {
       name: 'category',
       title: 'Product Category',
       type: 'reference',
-      to: [{type: 'category'}],
+      to: [{ type: 'category' }],
     },
     {
       name: 'mainImage',
@@ -46,7 +46,7 @@ export const ProductSchema = {
       name: 'gallery',
       title: 'Gallery Images',
       type: 'array',
-      of: [{type: 'galleryImage'}],
+      of: [{ type: 'galleryImage' }],
       options: {
         maxLength: 3,
       },

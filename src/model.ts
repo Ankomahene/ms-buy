@@ -1,3 +1,5 @@
+export type ItemKey = 'cart' | 'wishlist';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -20,16 +22,6 @@ export interface IProduct {
   gallery: string[];
 }
 
-export interface IFeaturedProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  rating: IRating;
-  mainImage: string;
-  slug: string;
-}
-
 export interface ICategory {
   id: string;
   name: string;
@@ -39,7 +31,25 @@ export interface ICategory {
 
 export interface IFeaturedItems {
   topCategories: ICategory[];
-  bestDeals: IFeaturedProduct[];
-  mostSellingProducts: IFeaturedProduct[];
-  trendingProducts: IFeaturedProduct[];
+  bestDeals: IProduct[];
+  mostSellingProducts: IProduct[];
+  trendingProducts: IProduct[];
+}
+
+export interface IState {
+  cart: IItem[];
+  wishlist: IItem[];
+}
+
+export interface IItem extends IProduct {
+  count: number;
+}
+
+export interface IContext {
+  state: IState;
+  addItem: (key: ItemKey, product: IProduct) => void;
+  removeItem: (key: ItemKey, productId: string) => void;
+  increaseCount: (key: ItemKey, productId: string) => void;
+  decreaseCount: (key: ItemKey, productId: string) => void;
+  isAdded: (key: ItemKey, productId: string) => boolean;
 }

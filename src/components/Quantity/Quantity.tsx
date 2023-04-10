@@ -2,13 +2,20 @@
 import { Button, HStack, Input, useNumberInput } from '@chakra-ui/react';
 import React from 'react';
 
-export const Quantity = () => {
+interface IQuantityProps {
+  step: number;
+  defaultValue: number;
+  min: number;
+  max: number;
+}
+
+export const Quantity = ({ step, defaultValue, min, max }: IQuantityProps) => {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 10,
+      step,
+      defaultValue,
+      min,
+      max,
     });
 
   const inc = getIncrementButtonProps();
@@ -22,4 +29,11 @@ export const Quantity = () => {
       <Button {...inc}>+</Button>
     </HStack>
   );
+};
+
+Quantity.defaultProps = {
+  step: 1,
+  defaultValue: 1,
+  min: 1,
+  max: 20,
 };

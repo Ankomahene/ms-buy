@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar/NavBar';
 import { theme } from '@/theme';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
+import AppContextProvider from '@src/context/AppContext';
 
 export default function RootLayout({
   children,
@@ -25,8 +26,10 @@ export default function RootLayout({
       <body>
         <CacheProvider>
           <ChakraProvider theme={theme}>
-            <Navbar />
-            {children}
+            <AppContextProvider>
+              <Navbar />
+              {children}
+            </AppContextProvider>
           </ChakraProvider>
         </CacheProvider>
       </body>

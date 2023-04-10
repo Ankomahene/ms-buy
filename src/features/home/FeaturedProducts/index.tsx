@@ -1,13 +1,13 @@
 'use client';
 import { Box } from '@chakra-ui/react';
 import { SectionHeading } from '@src/components/SectionHeading';
-import { IFeaturedProduct } from '@src/model';
+import { IProduct } from '@src/model';
 import React from 'react';
 import { ProductsSlider } from './ProductsSlider';
 
 interface FeaturedProducts {
   title: string;
-  products: IFeaturedProduct[];
+  products: IProduct[];
 }
 
 export const FeaturedProducts = ({ title, products }: FeaturedProducts) => {

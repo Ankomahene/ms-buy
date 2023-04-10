@@ -16,6 +16,7 @@ export const Rating = ({ rating }: RatingProps) => {
         half={true}
         size={18}
         color2={colors.brand.primary}
+        edit={false}
       />
       <Text fontSize="xs" mx="1">
         ({rating?.count})

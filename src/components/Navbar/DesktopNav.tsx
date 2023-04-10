@@ -3,7 +3,7 @@ import { Box, Flex, Stack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { AppLogo } from '../AppLogo';
 import { Cart } from '../Cart/Cart';
-import { Favorites } from '../Favorites/Favorites';
+import { Wishlist } from '../Wishlist/Wishlist';
 import { Search } from '../Search/Search';
 
 export function DesktopNav() {
@@ -32,7 +32,7 @@ export function DesktopNav() {
       </Stack>
 
       <Stack direction="row" spacing={2}>
-        <Favorites />
+        <Wishlist />
         <Cart />
       </Stack>
     </Flex>

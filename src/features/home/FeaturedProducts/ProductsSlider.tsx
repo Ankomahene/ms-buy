@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box } from '@chakra-ui/react';
 import { CSSProperties } from 'react';
 import { ProductCard } from '../../../components/ProductCard';
-import { IFeaturedProduct, IProduct } from '@src/model';
 import { SwiperNavButtons } from '@src/components/SwiperNavButtons';
+import { IProduct } from '@src/model';
 
 const slideStyles: CSSProperties = {
   boxSizing: 'border-box',
@@ -14,14 +14,13 @@ const slideStyles: CSSProperties = {
 };
 
 interface ProductsSlider {
-  products: IProduct[] | IFeaturedProduct[];
+  products: IProduct[];
 }
 export const ProductsSlider = ({ products }: ProductsSlider) => {
   const sliderSettings: SwiperOptions = {
     modules: [Navigation, A11y, Autoplay],
     spaceBetween: 10,
     slidesPerView: 'auto',
-    // loop: true,
     speed: 1000,
     autoplay: {
       delay: 5000,
