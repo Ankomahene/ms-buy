@@ -14,6 +14,7 @@
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mantine/hooks": "^6.0.7",
     "@sanity/vision": "^3.7.1",
     "@types/node": "18.15.5",
     "@types/react": "18.0.28",

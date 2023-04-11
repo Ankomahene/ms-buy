@@ -1,12 +1,4 @@
-import {
-  Button,
-  Grid,
-  GridItem,
-  HStack,
-  Image,
-  Input,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react';
 import { AppContext } from '@src/context/AppContext';
 import { getSubstring } from '@src/helpers';
 import { IItem } from '@src/model';
@@ -16,6 +8,8 @@ import { BsCart, BsCartX, BsTrash } from 'react-icons/bs';
 interface WishlistItemProps {
   item: IItem;
 }
+
+//TODO:  add responsiveness
 
 export const WishlistItem = ({ item }: WishlistItemProps) => {
   const { addItem, removeItem, isAdded } = useContext(AppContext);

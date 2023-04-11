@@ -17,6 +17,8 @@ interface CartItemProps {
   item: IItem;
 }
 
+//TODO:  add responsiveness
+
 export const CartItem = ({ item }: CartItemProps) => {
   const { increaseCount, decreaseCount, removeItem } = useContext(AppContext);
 
