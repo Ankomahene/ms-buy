@@ -1,23 +1,32 @@
 'use client';
 import { Flex } from '@chakra-ui/react';
+import { CustomBreadcrumb } from '@src/components/CustomBreadcrumb';
 import { ProductCard } from '@src/components/ProductCard';
-import { IProduct } from '@src/model';
+import { IBreadcrumbItem, IProduct } from '@src/model';
 import React from 'react';
 
 interface AllProductsProps {
   products: IProduct[];
+  breadcrumbItems: IBreadcrumbItem[];
 }
-export const AllProducts = ({ products }: AllProductsProps) => {
+
+export const AllProducts = ({
+  products,
+  breadcrumbItems,
+}: AllProductsProps) => {
   return (
-    <Flex
-      flexWrap="wrap"
-      w={{ base: '100%', lg: '90%' }}
-      mx="auto"
-      justify="center"
-    >
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </Flex>
+    <>
+      <CustomBreadcrumb items={breadcrumbItems} />
+      <Flex
+        flexWrap="wrap"
+        w={{ base: '100%', lg: '90%' }}
+        mx="auto"
+        justify="flex-start"
+      >
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Flex>
+    </>
   );
 };

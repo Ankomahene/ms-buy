@@ -13,15 +13,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { AppContext } from '@src/context/AppContext';
-import { count } from 'console';
+import { calculateItemsTotal } from '@src/helpers';
 import { useContext, useRef } from 'react';
 import { BsCart4 } from 'react-icons/bs';
-import { Quantity } from '../Quantity/Quantity';
 import { CartItem } from './CartItem';
 
 export const Cart = () => {
   const {
     state: { cart },
+    resetItems,
   } = useContext(AppContext);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -70,7 +70,6 @@ export const Cart = () => {
           <DrawerHeader color="brand.primary">
             Cart ( {cart.length} Items )
           </DrawerHeader>
-
           <DrawerBody>
             {cart.length === 0 ? (
               <>Your Cart is Empty</>
@@ -78,24 +77,32 @@ export const Cart = () => {
               cart.map((item) => <CartItem key={item.id} item={item} />)
             )}
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Clear Cart
-            </Button>
-            <Button
-              bgColor="brand.primary"
-              color="white"
-              _hover={{
-                bgColor: 'brand.primaryLight',
-              }}
-              _active={{
-                bgColor: 'brand.primaryLight',
-              }}
-            >
-              Checkout
-            </Button>
-          </DrawerFooter>
+          {cart.length !== 0 && (
+            <DrawerFooter justifyContent="space-between">
+              <Box>
+                <Button
+                  variant="outline"
+                  mr={3}
+                  onClick={() => resetItems('cart')}
+                >
+                  Clear Cart
+                </Button>
+                <Button
+                  bgColor="brand.primary"
+                  color="white"
+                  _hover={{
+                    bgColor: 'brand.primaryLight',
+                  }}
+                  _active={{
+                    bgColor: 'brand.primaryLight',
+                  }}
+                >
+                  Checkout
+                </Button>
+              </Box>
+              <Box fontWeight="bold">Total: $ {calculateItemsTotal(cart)}</Box>
+            </DrawerFooter>
+          )}
         </DrawerContent>
       </Drawer>
     </>

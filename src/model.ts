@@ -45,6 +45,11 @@ export interface IItem extends IProduct {
   count: number;
 }
 
+export interface IBreadcrumbItem {
+  name: string;
+  link: string;
+}
+
 export interface IContext {
   state: IState;
   addItem: (key: ItemKey, product: IProduct) => void;
@@ -52,4 +57,5 @@ export interface IContext {
   increaseCount: (key: ItemKey, productId: string) => void;
   decreaseCount: (key: ItemKey, productId: string) => void;
   isAdded: (key: ItemKey, productId: string) => boolean;
+  resetItems: (key: ItemKey) => void;
 }

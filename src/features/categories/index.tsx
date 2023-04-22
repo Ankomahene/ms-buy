@@ -31,7 +31,7 @@ interface CategoryCardProps {
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => (
-  <Link href={`/categories/${category.slug}`}>
+  <Link href={`/categories/${category.id}`}>
     <Card
       direction="column"
       align="center"

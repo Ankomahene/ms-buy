@@ -2,6 +2,7 @@ import { Button, Grid, GridItem, Image, Text } from '@chakra-ui/react';
 import { AppContext } from '@src/context/AppContext';
 import { getSubstring } from '@src/helpers';
 import { IItem } from '@src/model';
+import Link from 'next/link';
 import { useContext } from 'react';
 import { BsCart, BsCartX, BsTrash } from 'react-icons/bs';
 
@@ -24,18 +25,22 @@ export const WishlistItem = ({ item }: WishlistItemProps) => {
       py="1"
     >
       <GridItem>
-        <Image
-          src={item.mainImage}
-          boxSize="20px"
-          rounded="full"
-          borderWidth="1px"
-          borderColor="gray.300"
-        />
+        <Link href={item.slug}>
+          <Image
+            src={item.mainImage}
+            boxSize="20px"
+            rounded="full"
+            borderWidth="1px"
+            borderColor="gray.300"
+          />
+        </Link>
       </GridItem>
       <GridItem colSpan={4}>
-        <Text fontSize="sm" title={item.name}>
-          {getSubstring(item.name, 17)}
-        </Text>
+        <Link href={item.slug}>
+          <Text fontSize="sm" title={item.name}>
+            {getSubstring(item.name, 17)}
+          </Text>
+        </Link>
       </GridItem>
 
       <GridItem>

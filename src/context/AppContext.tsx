@@ -16,7 +16,6 @@ const initialState: IState = {
 const AppContextProvider: React.FC<IAppContextProviderProps> = ({
   children,
 }) => {
-  // TODO: Persis to local storage
   const [state, setState] = useLocalStorage<IState>({
     key: 'ms-buy',
     defaultValue: initialState,
@@ -52,6 +51,13 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({
     setState((prevState) => ({ ...prevState, [key]: items }));
   };
 
+  const resetItems = (key: ItemKey) => {
+    setState((prevState) => ({
+      ...prevState,
+      [key]: [],
+    }));
+  };
+
   const isAdded = (key: ItemKey, productId: string): boolean => {
     return state[key].some((item) => item.id === productId);
   };
@@ -65,6 +71,7 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({
         increaseCount,
         decreaseCount,
         isAdded,
+        resetItems,
       }}
     >
       {children}

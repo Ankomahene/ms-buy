@@ -1,10 +1,12 @@
 import {
   Button,
+  Flex,
   Popover,
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
+  PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
   Text,
@@ -17,6 +19,7 @@ import { WishlistItem } from './WishlistItem';
 export const Wishlist = () => {
   const {
     state: { wishlist },
+    resetItems,
   } = useContext(AppContext);
 
   return (
@@ -28,8 +31,25 @@ export const Wishlist = () => {
           _hover={{
             bgColor: 'transparent',
           }}
+          pos="relative"
         >
           <BsHeart size="0.9rem" /> <Text mx="1">Wishlist</Text>
+          {wishlist.length !== 0 && (
+            <Flex
+              pos="absolute"
+              top="0px"
+              right="5px"
+              bgColor="brand.primaryLight"
+              boxSize="15px"
+              rounded="full"
+              color="white"
+              fontSize="0.6rem"
+              align="center"
+              justify="center"
+            >
+              {wishlist.length}
+            </Flex>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
@@ -45,6 +65,17 @@ export const Wishlist = () => {
             wishlist.map((item) => <WishlistItem key={item.id} item={item} />)
           )}
         </PopoverBody>
+        <PopoverFooter>
+          {wishlist.length !== 0 && (
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={() => resetItems('wishlist')}
+            >
+              Clear Wishlist
+            </Button>
+          )}
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );
