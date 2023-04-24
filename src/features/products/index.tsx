@@ -7,9 +7,10 @@ import React from 'react';
 
 interface AllProductsProps {
   products: IProduct[];
-  breadcrumbItems: IBreadcrumbItem[];
+  breadcrumbItems?: IBreadcrumbItem[];
 }
 
+// TODO: Implement Pagination
 export const AllProducts = ({
   products,
   breadcrumbItems,

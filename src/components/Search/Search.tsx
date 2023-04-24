@@ -3,6 +3,8 @@ import { Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import React from 'react';
 import { inputGroup, searchBtn } from './Style';
 
+// TODO: TypeAhead to search for products
+
 export const Search = () => {
   return (
     <InputGroup {...inputGroup}>
