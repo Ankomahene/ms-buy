@@ -1,7 +1,6 @@
 'use client';
 import {
   Box,
-  Button,
   Card,
   CardBody,
   Flex,
@@ -9,51 +8,21 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { IProduct } from '@src/model';
 import { getSubstring } from '@src/helpers';
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { Rating } from './Rating';
+import { IProduct } from '@src/model';
 import Link from 'next/link';
-import { AppContext } from '@src/context/AppContext';
-import { useContext } from 'react';
+import { AddToWishlistButton } from './AddToWishlistButton';
 import { AddToCartButton } from './Cart/AddToCartButton';
+import { Rating } from './Rating';
 
 interface ProductCardProps {
   product: IProduct;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const { addItem, removeItem, isAdded } = useContext(AppContext);
-
   return (
     <Card w="xs" pos="relative" m="0.5rem">
-      {isAdded('wishlist', product.id) ? (
-        <Button
-          pos="absolute"
-          variant="ghost"
-          bgColor="transparent"
-          color="red.400"
-          _hover={{ bgColor: 'transparent' }}
-          rounded="full"
-          title="Remove from Wishlist"
-          onClick={() => removeItem('wishlist', product.id)}
-        >
-          <BsHeartFill />
-        </Button>
-      ) : (
-        <Button
-          pos="absolute"
-          variant="ghost"
-          bgColor="transparent"
-          color="red.400"
-          _hover={{ bgColor: 'transparent' }}
-          rounded="full"
-          title="Add to Wishlist"
-          onClick={() => addItem('wishlist', product)}
-        >
-          <BsHeart />
-        </Button>
-      )}
+      <AddToWishlistButton product={product} />
       <CardBody>
         <Link href={`/products/${product.slug}`}>
           <Box

@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { AddToWishlistButton } from '@src/components/AddToWishlistButton';
 import { AddToCartButton } from '@src/components/Cart/AddToCartButton';
 import { CustomBreadcrumb } from '@src/components/CustomBreadcrumb';
 import { Quantity } from '@src/components/Quantity/Quantity';
@@ -62,7 +63,8 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
         p="2rem"
         gap="20"
       >
-        <GridItem p="1rem">
+        <GridItem p="1rem" pos="relative">
+          <AddToWishlistButton product={product} />
           <Image src={product?.mainImage} alt={product.name} mx="auto" />
           <Flex>
             {product.gallery?.length !== 0 &&
@@ -106,6 +108,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
               size="sm"
               w="160px"
               mr="1rem"
+              my="0.5rem"
               _hover={{ bgColor: 'none' }}
             >
               Buy Now
