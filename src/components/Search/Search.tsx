@@ -1,7 +1,6 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   Flex,
   Image,
   Input,
@@ -11,21 +10,12 @@ import {
   Text,
   useOutsideClick,
 } from '@chakra-ui/react';
-import React, {
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { inputGroup, searchBtn } from './Style';
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { IProduct } from '@src/model';
-import { groq } from 'next-sanity';
 import { client } from '@utils/sanity.client';
+import { groq } from 'next-sanity';
 import Link from 'next/link';
-
-// TODO: TypeAhead to search for products
+import { useEffect, useRef, useState } from 'react';
+import { inputGroup } from './Style';
 
 const query: string = groq`
     *[_type == "product" && (name match $searchText || description match $searchText) ] {
@@ -77,7 +67,7 @@ export const Search = () => {
   }, [searchText]);
 
   return (
-    <Box pos="relative" w="25rem" ref={ref}>
+    <Box pos="relative" w={{ base: '100%', lg: '32rem' }} ref={ref}>
       <InputGroup {...inputGroup}>
         <InputLeftElement
           pointerEvents="none"
