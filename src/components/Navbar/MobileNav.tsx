@@ -25,7 +25,12 @@ export function MobileNav() {
           <Cart />
         </Stack>
       </Flex>
-      <Box px="2rem" py="0.5rem" display={{ base: 'block', lg: 'none' }}>
+      <Box
+        px="2rem"
+        py="0.5rem"
+        mb="1rem"
+        display={{ base: 'block', lg: 'none' }}
+      >
         <Search />
       </Box>
     </>
