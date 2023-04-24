@@ -66,6 +66,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
         <GridItem p="1rem" pos="relative">
           <AddToWishlistButton product={product} />
           <Image src={product?.mainImage} alt={product.name} mx="auto" />
+          {/* TODO: fix product gallery */}
           <Flex>
             {product.gallery?.length !== 0 &&
               product.gallery?.map((image, i) => (

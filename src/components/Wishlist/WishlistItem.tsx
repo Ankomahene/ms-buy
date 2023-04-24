@@ -10,8 +10,6 @@ interface WishlistItemProps {
   item: IItem;
 }
 
-//TODO:  add responsiveness
-
 export const WishlistItem = ({ item }: WishlistItemProps) => {
   const { addItem, removeItem, isAdded } = useContext(AppContext);
 
