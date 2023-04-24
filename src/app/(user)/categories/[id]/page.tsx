@@ -1,5 +1,5 @@
 import { AllProducts } from '@src/features/products';
-import { IBreadcrumbItem, IProduct } from '@src/model';
+import { IBreadcrumbItem, ICategory, IProduct } from '@src/model';
 import { client } from '@utils/sanity.client';
 import { groq } from 'next-sanity';
 import React from 'react';
@@ -42,7 +42,7 @@ async function CategoryPage({ params: { id } }: Props) {
         products={products}
         breadcrumbItems={[
           ...items,
-          { name: products[0].category.name, link: '#' },
+          { name: products[0]?.category?.name, link: '#' },
         ]}
       />
     </>
@@ -50,3 +50,15 @@ async function CategoryPage({ params: { id } }: Props) {
 }
 
 export default CategoryPage;
+
+export async function generateStaticParams() {
+  const query = groq`*[_type == "category"] {
+    "id": _id
+  }`;
+
+  const categories: ICategory[] = await client.fetch(query);
+
+  return categories.map((category) => ({
+    id: category.id,
+  }));
+}
