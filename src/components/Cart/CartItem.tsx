@@ -1,12 +1,10 @@
 import {
   Button,
-  Flex,
   Grid,
   GridItem,
   HStack,
   Image,
   Input,
-  NumberInput,
   Text,
 } from '@chakra-ui/react';
 import { AppContext } from '@src/context/AppContext';
@@ -18,8 +16,6 @@ import { BsTrash } from 'react-icons/bs';
 interface CartItemProps {
   item: IItem;
 }
-
-//TODO:  add responsiveness
 
 export const CartItem = ({ item }: CartItemProps) => {
   const { increaseCount, decreaseCount, removeItem } = useContext(AppContext);
@@ -48,7 +44,7 @@ export const CartItem = ({ item }: CartItemProps) => {
           <Text>{item.name}</Text>
         </Link>
       </GridItem>
-      <GridItem colSpan={{ base: 4, lg: 2 }} justifyContent="flex-end">
+      <GridItem colSpan={{ base: 3, lg: 2 }} justifyContent="flex-end">
         <HStack my="0.5rem" justifyContent="flex-end">
           <Button onClick={() => decreaseCount('cart', item.id)}>-</Button>
           <Input
@@ -63,7 +59,7 @@ export const CartItem = ({ item }: CartItemProps) => {
           <Button onClick={() => increaseCount('cart', item.id)}>+</Button>
         </HStack>
       </GridItem>
-      <GridItem textAlign="right">
+      <GridItem textAlign="right" colSpan={{ base: 2, lg: 1 }}>
         <Text fontWeight="bold">$ {item.price * item.count}</Text>
       </GridItem>
       <GridItem textAlign="right">
