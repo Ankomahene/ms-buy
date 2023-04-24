@@ -12,13 +12,14 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { AddToCartButton } from '@src/components/Cart/AddToCartButton';
 import { CustomBreadcrumb } from '@src/components/CustomBreadcrumb';
 import { Quantity } from '@src/components/Quantity/Quantity';
 import { Rating } from '@src/components/Rating';
+import { AppContext } from '@src/context/AppContext';
 import { getSubstring } from '@src/helpers';
 import { IBreadcrumbItem, IProduct } from '@src/model';
-// import Image from 'next/image';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 interface ProductDetailsProps {
   product: IProduct;
@@ -36,6 +37,9 @@ const items: IBreadcrumbItem[] = [
 ];
 
 export const ProductDetails = ({ product }: ProductDetailsProps) => {
+  const [quantity, setQuantity] = useState(1);
+  const { isAdded } = useContext(AppContext);
+
   return (
     <>
       <CustomBreadcrumb
@@ -86,7 +90,12 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
             ${product.price}
           </Text>
           <Divider my="1rem" />
-          <Quantity />
+          <Quantity
+            setQuantity={(_valueAsString, valueAsNumber) =>
+              setQuantity(valueAsNumber)
+            }
+            disabled={isAdded('cart', product.id)}
+          />
           <Divider my="1rem" />
           <Box>
             <Button
@@ -94,23 +103,14 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
               bgColor="brand.primary"
               color="white"
               borderRadius="50px"
+              size="sm"
               w="160px"
               mr="1rem"
               _hover={{ bgColor: 'none' }}
             >
               Buy Now
             </Button>
-            <Button
-              variant="outline"
-              borderColor="brand.primary"
-              color="brand.primary"
-              borderRadius="50px"
-              w="160px"
-              mr="1rem"
-              _hover={{ bgColor: 'none' }}
-            >
-              Add to cart
-            </Button>
+            <AddToCartButton product={product} count={quantity} />
           </Box>
 
           <Stack py="2rem">

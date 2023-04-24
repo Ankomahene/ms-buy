@@ -9,10 +9,10 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { IBreadcrumbItem } from '@src/model';
 
 interface ICustomBreadcrumbProps {
-  items: IBreadcrumbItem[];
+  items?: IBreadcrumbItem[];
 }
 
-export const CustomBreadcrumb = ({ items }: ICustomBreadcrumbProps) => {
+export const CustomBreadcrumb = ({ items = [] }: ICustomBreadcrumbProps) => {
   return (
     <>
       {items.length > 0 && (
@@ -27,11 +27,11 @@ export const CustomBreadcrumb = ({ items }: ICustomBreadcrumbProps) => {
         >
           {items.map((item, index) =>
             index !== items.length - 1 ? (
-              <BreadcrumbItem>
+              <BreadcrumbItem key={index}>
                 <BreadcrumbLink href={item.link}>{item.name}</BreadcrumbLink>
               </BreadcrumbItem>
             ) : (
-              <BreadcrumbItem>
+              <BreadcrumbItem key={index}>
                 <Text color="gray.500">{item.name}</Text>
               </BreadcrumbItem>
             )
@@ -40,8 +40,4 @@ export const CustomBreadcrumb = ({ items }: ICustomBreadcrumbProps) => {
       )}
     </>
   );
-};
-
-CustomBreadcrumb.defaultProps = {
-  items: [],
 };

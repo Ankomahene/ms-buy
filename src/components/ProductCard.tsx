@@ -16,6 +16,7 @@ import { Rating } from './Rating';
 import Link from 'next/link';
 import { AppContext } from '@src/context/AppContext';
 import { useContext } from 'react';
+import { AddToCartButton } from './Cart/AddToCartButton';
 
 interface ProductCardProps {
   product: IProduct;
@@ -75,31 +76,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Text fontSize="sm"> {getSubstring(product.description, 30)} </Text>
           <Rating rating={product.rating} />
 
-          {isAdded('cart', product.id) ? (
-            <Button
-              variant="outline"
-              borderColor="gray.200"
-              color="gray.500"
-              borderRadius="50px"
-              size="sm"
-              maxW="150px"
-              onClick={() => removeItem('cart', product.id)}
-            >
-              Remove from cart
-            </Button>
-          ) : (
-            <Button
-              variant="outline"
-              borderColor="brand.primary"
-              color="brand.primary"
-              borderRadius="50px"
-              size="sm"
-              maxW="120px"
-              onClick={() => addItem('cart', product)}
-            >
-              Add to cart
-            </Button>
-          )}
+          <AddToCartButton product={product} />
         </Stack>
       </CardBody>
     </Card>

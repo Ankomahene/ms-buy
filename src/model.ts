@@ -52,7 +52,7 @@ export interface IBreadcrumbItem {
 
 export interface IContext {
   state: IState;
-  addItem: (key: ItemKey, product: IProduct) => void;
+  addItem: (key: ItemKey, product: IProduct, count?: number) => void;
   removeItem: (key: ItemKey, productId: string) => void;
   increaseCount: (key: ItemKey, productId: string) => void;
   decreaseCount: (key: ItemKey, productId: string) => void;

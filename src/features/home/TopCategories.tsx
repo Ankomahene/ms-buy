@@ -58,7 +58,7 @@ interface TopCategoryCardProps {
 }
 
 const TopCategoryCard = ({ category }: TopCategoryCardProps) => (
-  <Link href={`/categories/${category.slug}`}>
+  <Link href={`/categories/${category.id}`}>
     <Card
       direction="row"
       align="center"

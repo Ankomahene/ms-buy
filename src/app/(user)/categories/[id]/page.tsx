@@ -1,5 +1,4 @@
 import { AllProducts } from '@src/features/products';
-import { ProductDetails } from '@src/features/products/ProductDetails';
 import { IBreadcrumbItem, IProduct } from '@src/model';
 import { client } from '@utils/sanity.client';
 import { groq } from 'next-sanity';
@@ -13,6 +12,8 @@ const query: string = groq`
         category->{ name },
     }
 `;
+
+export const revalidate = 60; // revalidate this page every 60 seconds
 
 type Props = {
   params: {

@@ -21,10 +21,10 @@ const AppContextProvider: React.FC<IAppContextProviderProps> = ({
     defaultValue: initialState,
   });
 
-  const addItem = (key: ItemKey, product: IProduct) => {
+  const addItem = (key: ItemKey, product: IProduct, count?: number) => {
     setState((prevState) => ({
       ...prevState,
-      [key]: [...prevState[key], { ...product, count: 1 }],
+      [key]: [...prevState[key], { ...product, count: count || 1 }],
     }));
   };
 
