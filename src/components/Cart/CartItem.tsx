@@ -27,7 +27,7 @@ export const CartItem = ({ item }: CartItemProps) => {
   return (
     <Grid
       alignItems="center"
-      templateColumns="repeat(8, 1fr)"
+      templateColumns={{ base: 'repeat(6, 1fr)', lg: 'repeat(8, 1fr)' }}
       borderBottomWidth="1px"
       borderBottomColor="gray.200"
       my="2"
@@ -43,19 +43,20 @@ export const CartItem = ({ item }: CartItemProps) => {
           />
         </Link>
       </GridItem>
-      <GridItem colSpan={3}>
+      <GridItem colSpan={{ base: 5, lg: 3 }}>
         <Link href={`/products/${item.slug}`}>
           <Text>{item.name}</Text>
         </Link>
       </GridItem>
-      <GridItem colSpan={2}>
-        <HStack maxW="140px" my="0.5rem">
+      <GridItem colSpan={{ base: 4, lg: 2 }} justifyContent="flex-end">
+        <HStack my="0.5rem" justifyContent="flex-end">
           <Button onClick={() => decreaseCount('cart', item.id)}>-</Button>
           <Input
             type="number"
             value={item.count}
             readOnly={true}
             minW="52px"
+            maxW="55px"
             min="1"
             max="20"
           />
@@ -65,7 +66,6 @@ export const CartItem = ({ item }: CartItemProps) => {
       <GridItem textAlign="right">
         <Text fontWeight="bold">$ {item.price * item.count}</Text>
       </GridItem>
-
       <GridItem textAlign="right">
         <Button
           variant="ghost"

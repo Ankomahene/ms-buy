@@ -7,6 +7,7 @@ import React from 'react';
 const query: string = groq`
     *[_type == "product" && references($id)] {
         ...,
+        "id": _id,
         "slug": slug.current,
         "mainImage": mainImage.asset->url,
         category->{ name },
