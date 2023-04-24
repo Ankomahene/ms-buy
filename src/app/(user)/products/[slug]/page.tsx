@@ -37,14 +37,14 @@ async function ProductDetailsPage({ params: { slug } }: Props) {
 
 export default ProductDetailsPage;
 
-export async function generateStaticParams() {
-  const query = groq`*[_type == "product"] {
-    "slug": slug.current
-  }`;
+// export async function generateStaticParams() {
+//   const query = groq`*[_type == "product"] {
+//     "slug": slug.current
+//   }`;
 
-  const products: IProduct[] = await client.fetch(query);
+//   const products: IProduct[] = await client.fetch(query);
 
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
-}
+//   return products.map((product) => ({
+//     slug: product.slug,
+//   }));
+// }
