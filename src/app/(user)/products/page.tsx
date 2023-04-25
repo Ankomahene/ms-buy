@@ -1,3 +1,4 @@
+import { Hero } from '@src/components/Hero/Hero';
 import { AllProducts } from '@src/features/products';
 import { IProduct } from '@src/model';
 import { client } from '@utils/sanity.client';
@@ -26,6 +27,13 @@ export default async function ProductsPage() {
 
   return (
     <>
+      <Hero
+        heading="Best and Quality Products"
+        description="Affordability, Durability, Fast and Convenient Delivery, Free Shipping and more"
+        imageUrl="/bags.jpg"
+        btnLabel="View All Categories"
+        btnLink="/categories"
+      />
       <AllProducts products={products} />
     </>
   );

@@ -5,6 +5,7 @@ import { ProductCard } from '@src/components/ProductCard';
 import { IBreadcrumbItem, IProduct } from '@src/model';
 import React, { useState } from 'react';
 import { usePagination } from '@mantine/hooks';
+import { Hero } from '@src/components/Hero/Hero';
 
 interface AllProductsProps {
   products: IProduct[];
@@ -39,7 +40,7 @@ export const AllProducts = ({
         flexWrap="wrap"
         w={{ base: '100%', lg: '90%' }}
         mx="auto"
-        justify={{ base: 'center', lg: 'flex-start' }}
+        justify={{ base: 'center', lg: 'space-between' }}
       >
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />

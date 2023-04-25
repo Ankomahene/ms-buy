@@ -1,3 +1,4 @@
+import { Hero } from '@src/components/Hero/Hero';
 import { AllProducts } from '@src/features/products';
 import { IBreadcrumbItem, ICategory, IProduct } from '@src/model';
 import { client } from '@utils/sanity.client';
@@ -10,7 +11,7 @@ const query: string = groq`
         "id": _id,
         "slug": slug.current,
         "mainImage": mainImage.asset->url,
-        category->{ name },
+        category->{ name, "image": image.asset->url  },
     }
 `;
 
@@ -38,6 +39,13 @@ async function CategoryPage({ params: { id } }: Props) {
 
   return (
     <>
+      <Hero
+        heading={products[0]?.category?.name}
+        description={`Best and Affordable ${products[0]?.category?.name}`}
+        imageUrl={products[0]?.category?.image}
+        btnLabel="View All Categories"
+        btnLink="/categories"
+      />
       <AllProducts
         products={products}
         breadcrumbItems={[
