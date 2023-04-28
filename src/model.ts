@@ -1,4 +1,4 @@
-export type ItemKey = 'cart' | 'wishlist';
+export type ItemKey = 'cart' | 'wishlist' | 'checkout';
 
 export interface NavItem {
   label: string;
@@ -39,6 +39,7 @@ export interface IFeaturedItems {
 export interface IState {
   cart: IItem[];
   wishlist: IItem[];
+  checkout: IItem[];
 }
 
 export interface IItem extends IProduct {

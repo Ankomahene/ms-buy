@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { AppContext } from '@src/context/AppContext';
 import { calculateItemsTotal } from '@src/helpers';
+import Link from 'next/link';
 import { useContext, useRef } from 'react';
 import { BsCart4 } from 'react-icons/bs';
 import { CartItem } from './CartItem';
@@ -22,10 +23,20 @@ export const Cart = () => {
   const {
     state: { cart },
     resetItems,
+    addItem,
   } = useContext(AppContext);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<any>();
+
+  const handleCheckout = () => {
+    resetItems('checkout');
+    cart.forEach((cartItem) => {
+      addItem('checkout', cartItem, cartItem.count);
+    });
+
+    onClose();
+  };
 
   return (
     <>
@@ -87,18 +98,21 @@ export const Cart = () => {
                 >
                   Clear Cart
                 </Button>
-                <Button
-                  bgColor="brand.primary"
-                  color="white"
-                  _hover={{
-                    bgColor: 'brand.primaryLight',
-                  }}
-                  _active={{
-                    bgColor: 'brand.primaryLight',
-                  }}
-                >
-                  Checkout
-                </Button>
+                <Link href="/checkout">
+                  <Button
+                    bgColor="brand.primary"
+                    color="white"
+                    _hover={{
+                      bgColor: 'brand.primaryLight',
+                    }}
+                    _active={{
+                      bgColor: 'brand.primaryLight',
+                    }}
+                    onClick={handleCheckout}
+                  >
+                    Checkout
+                  </Button>
+                </Link>
               </Box>
               <Box fontWeight="bold">Total: $ {calculateItemsTotal(cart)}</Box>
             </DrawerFooter>

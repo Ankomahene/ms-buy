@@ -26,3 +26,7 @@ export const calculateItemsTotal = (items: IItem[]): number => {
       0
     );
 };
+
+export const formatPrice = (value: number): string => {
+  return value.toFixed(2);
+};

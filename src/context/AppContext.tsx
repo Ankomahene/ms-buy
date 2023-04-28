@@ -11,6 +11,7 @@ interface IAppContextProviderProps {
 const initialState: IState = {
   cart: [],
   wishlist: [],
+  checkout: [],
 };
 
 const AppContextProvider: React.FC<IAppContextProviderProps> = ({

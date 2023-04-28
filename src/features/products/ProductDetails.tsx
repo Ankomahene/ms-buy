@@ -39,7 +39,7 @@ const items: IBreadcrumbItem[] = [
 
 export const ProductDetails = ({ product }: ProductDetailsProps) => {
   const [quantity, setQuantity] = useState(1);
-  const { isAdded } = useContext(AppContext);
+  const { isAdded, addItem, resetItems } = useContext(AppContext);
 
   return (
     <>
@@ -101,19 +101,25 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
           />
           <Divider my="1rem" />
           <Box>
-            <Button
-              variant="outline"
-              bgColor="brand.primary"
-              color="white"
-              borderRadius="50px"
-              size="sm"
-              w="160px"
-              mr="1rem"
-              my="0.5rem"
-              _hover={{ bgColor: 'none' }}
-            >
-              Buy Now
-            </Button>
+            <Link href="/checkout">
+              <Button
+                variant="outline"
+                bgColor="brand.primary"
+                color="white"
+                borderRadius="50px"
+                size="sm"
+                w="160px"
+                mr="1rem"
+                my="0.5rem"
+                _hover={{ bgColor: 'none' }}
+                onClick={() => {
+                  resetItems('checkout');
+                  addItem('checkout', product, quantity);
+                }}
+              >
+                Buy Now
+              </Button>
+            </Link>
             <AddToCartButton product={product} count={quantity} />
           </Box>
 
